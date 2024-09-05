@@ -1,0 +1,95 @@
+{% extends 'pages/base.html' %}
+{% block title %}Gastrotaberna Madre Mía{% endblock title %}
+{% block body_class %}carta-page{% endblock body_class %}
+{% block content %}
+{% include 'pages/navbar.html' %}
+
+<!-- Sección de la imagen superior -->
+<section class="top-image">
+    <div class="image-container">
+        {% if parrafos %}
+            {% with first_parrafo=parrafos.0 %}
+                {% if first_parrafo.imagen %}
+                    <img src="{{ first_parrafo.imagen.url }}" alt="{{ first_parrafo.titulo }}" class="responsive-img responsive-img-top">
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    </div>
+
+    <!-- Botones encima de la imagen -->
+    <div class="button-container">
+        <a href="{% url 'carta' %}" class="btn-link">Carta</a>
+        <a href="https://www.google.com/maps/reserve/v/dine/c/p43SBzepBZs?source=pa&opi=79508299&hl=es-ES&gei=sb3YZvSrBoiGxc8Pr-btqQ8&sourceurl=http://www.google.com/service/MapsPlaceService/GetPlace?authuser%3D0%26gl%3Des%26hl%3Des%26q%3DMadre%2BMia" target="_blank" class="btn-link-up">Reservas</a>
+        <a href="{% url 'nosotros' %}" class="btn-link">Equipo</a>
+    </div>
+</section>
+
+
+<!-- Sección de imágenes laterales animadas -->
+<section class="additional-content">
+    <div class="content-row">
+        {% if parrafos|length > 1 %}
+            {% with second_parrafo=parrafos.1 %}
+                <div class="content-block image-left">
+                    {% if second_parrafo.imagen %}
+                        <img src="{{ second_parrafo.imagen.url }}" alt="{{ second_parrafo.titulo }}" class="responsive-img">
+                    {% endif %}
+                    <h2>{{ second_parrafo.titulo|title }}</h2>
+                    <p>{{ second_parrafo.texto }}</p>
+                </div>
+            {% endwith %}
+        {% endif %}
+        
+        {% if parrafos|length > 2 %}
+            {% with third_parrafo=parrafos.2 %}
+                <div class="content-block image-right">
+                    {% if third_parrafo.imagen %}
+                        <img src="{{ third_parrafo.imagen.url }}" alt="{{ third_parrafo.titulo }}" class="responsive-img">
+                    {% endif %}
+                    <h2>{{ third_parrafo.titulo|title }}</h2>
+                    <p>{{ third_parrafo.texto }}</p>
+                </div>
+            {% endwith %}
+        {% endif %}
+    </div>
+
+    <!-- Sección de la última imagen centrada -->
+    <div class="content-row">
+        {% if parrafos|length > 3 %}
+            {% with last_parrafo=parrafos.3 %}
+                <div class="content-block full-width image-center">
+                    {% if last_parrafo.imagen %}
+                        <img src="{{ last_parrafo.imagen.url }}" alt="{{ last_parrafo.titulo }}" class="responsive-img">
+                    {% endif %}
+                    <h2>{{ last_parrafo.titulo }}</h2>
+                    <p>{{ last_parrafo.texto }}</p>
+                </div>
+            {% endwith %}
+        {% endif %}
+    </div>
+</section>
+
+<!-- Sección del carrusel -->
+<section class="image-carousel">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <!-- Slides will be injected here dynamically -->
+            {% for parrafo in parrafos %}
+                <div class="swiper-slide">
+                    <img src="{{ parrafo.imagen.url }}" alt="Imagen del carrusel">
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+
+{% include 'pages/footer.html' %}
+{% endblock content %}
+

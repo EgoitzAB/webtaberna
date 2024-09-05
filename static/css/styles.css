@@ -1,0 +1,696 @@
+/* styles.css */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#menuToggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1100;
+    color: green;
+    background-color: #da801ae3;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(249, 253, 4, 0.5);
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    overflow-x: hidden;
+}
+
+#menuOverlay.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+#menu {
+    background-color: rgb(84, 85, 34);
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 100%; /* Asegura que el menú no exceda el ancho de la pantalla */
+    box-sizing: border-box; /* Incluye padding y border en el tamaño total del elemento */
+}
+
+#menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+#menu ul li {
+    margin: 20px 0;
+}
+
+/* Enlaces del menú */
+#menu ul li a {
+    color: #da801ae3;
+    text-decoration: none;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    transition: color 0.3s ease;
+    max-width: 100%; /* Asegura que los enlaces no excedan el ancho de la pantalla */
+    box-sizing: border-box;
+}
+#closeMenu {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #fff;
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 600px) {
+    #menuToggle {
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        padding: 8px;
+    }
+
+    #menu ul {
+        margin-top: 0;
+    }
+    #menu ul li a {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    #closeMenu {
+        font-size: 24px;
+    }
+
+    #menu {
+        width: 95vw;
+        height: 95vh;
+    }
+}
+
+/* Ajustes específicos para pantallas medianas */
+@media (max-width: 1200px) {
+    #menuToggle {
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        padding: 8px;
+    }
+
+    #menu ul {
+        margin-top: 0;
+    }
+    #menu ul li a {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    #closeMenu {
+        font-size: 24px;
+    }
+
+    #menu {
+        width: 95vw;
+        height: 95vh;
+    }
+}
+/* Estilos generales para el .image-container */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 1024px) {
+    .image-container {
+        height: 70vh; /* Reduce la altura en pantallas medianas */
+    }
+
+    .image-container + * {
+        margin-top: 0; /* Elimina el margen superior del siguiente elemento */
+    }
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+    .image-container {
+        height: 50vh; /* Reduce aún más la altura en pantallas pequeñas */
+    }
+
+    .image-container + * {
+        margin-top: 0; /* Elimina el margen superior del siguiente elemento */
+    }
+}
+
+
+/* Ocultar imágenes inicialmente */
+.responsive-img {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    display: none;  /* Oculta la imagen inicialmente */
+    z-index: -1;  /* Envía las imágenes detrás de la imagen principal */
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out, z-index 0.5s;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.responsive-img-top {
+    margin-top:0 !important;
+}
+/* Mostrar imágenes con animación */
+.image-visible {
+    opacity: 1;
+    display: block;  /* Muestra la imagen cuando es visible */
+    z-index: 1;  /* Trae las imágenes al frente */
+}
+
+/* Layout for the two-column row */
+.content-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+/* Content block para las imágenes de izquierda y derecha */
+.content-block {
+    width: 48%;
+    text-align: center;
+    transform: translateY(-300px); /* Posición inicial arriba fuera de pantalla */
+    opacity: 0;
+    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+/* Animación para content blocks cuando son visibles */
+.content-block.image-visible {
+    opacity: 1;
+    transform: translate(0,0);
+}
+
+/* Ajustar imágenes dentro de los content blocks */
+.content-block img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Bloque de ancho completo para la imagen debajo de las dos columnas */
+.full-width {
+    width: 80%;
+    margin: 0 auto; 
+}
+
+/* Posicionamiento inicial para imágenes (off-screen, diagonal from top-center) */
+.image-left {
+    transform: translate(50%, -50%); /* Diagonal desde el centro-arriba, izquierda */
+}
+
+.image-right {
+    transform: translate(-50%, -50%); /* Diagonal desde el centro-arriba, derecha */
+}
+
+.image-center {
+    transform: translate(0, -50%); /* Directamente arriba */
+}
+/* Mover imágenes a posiciones finales cuando son visibles */
+.image-visible.image-left, 
+.image-visible.image-right, 
+.image-visible.image-center {
+    transform: translate(0, 0);
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .content-block {
+        width: 100%; /* Hacer que cada bloque ocupe todo el ancho en pantallas más pequeñas */
+    }
+
+    .content-row {
+        flex-direction: column;
+    }
+}
+/* Estilos para el carrousel de la galería */
+/* Estilo para el contenedor del carrusel */
+.image-carousel {
+    width: 80vw;
+    height: 30vh; /* Puedes ajustar esta altura según lo desees */
+    overflow: hidden; /* Asegura que los elementos puedan desbordar */
+}
+
+/* Contenedor de Swiper */
+.swiper-container {
+    width: auto;
+    height: auto;
+}
+
+
+.swiper-wrapper {
+    display: flex;
+    align-items: center; /* Centra verticalmente las imágenes */
+    justify-content: center; /* Centra horizontalmente las imágenes */
+}
+
+/* Estilo para cada slide */
+.swiper-slide {
+    background: #fff; /* Fondo blanco para un contraste mayor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta cualquier desbordamiento no deseado */
+    width: auto;
+    height: auto;
+}
+
+/* Imágenes dentro de los slides */
+.swiper-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease; /* Efecto suave al mover */
+}
+
+/* Hover effect para las imágenes */
+.swiper-slide:hover img {
+    transform: scale(1.1); /* Zoom al pasar el mouse */
+}
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+gmp-map {
+    height: 90%;
+  }
+
+/* CSS básico para el mapa */
+#map {
+    height: 50vh; /* El mapa ocupará el 50% de la altura de la ventana */
+    width: 80%;  /* El mapa ocupará el 100% del ancho disponible */
+    min-height: 300px; /* Asegura que el mapa nunca sea más pequeño que 300px de altura */
+    margin: 0 auto; 
+}
+
+/* Ajustes adicionales para pantallas pequeñas */
+@media (max-width: 600px) {
+    #map {
+        height: 60vh; /* En pantallas más pequeñas, el mapa ocupa un poco más de la altura */
+    }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1200px) {
+    #map {
+        height: 40vh; /* En pantallas grandes, el mapa ocupa un poco menos de altura */
+    }
+}
+
+.titulo-footer {
+    text-align: center;
+}
+
+.custom-footer {
+    background-color: #045808;
+    color: #ffffff;
+    padding: 40px 0;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-column {
+    flex: 1 1 30%;
+    margin-bottom: 20px;
+}
+
+.logo-column {
+    text-align: center;
+}
+
+.footer-logo img {
+    max-width: 100px;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.footer-list-item {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.footer-list-item a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-list-item a:hover {
+    color: #f8f9fa;
+}
+
+.footer-social {
+    margin-top: 20px;
+}
+
+.footer-social a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+    color: #f8f9fa;
+}
+
+.links-column .footer-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.links-column .footer-menu li {
+    margin-bottom: 10px;
+}
+
+.links-column .footer-menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.links-column .footer-menu li a:hover {
+    color: #f8f9fa;
+}
+
+.footer-bottom {
+    border-top: 1px solid #495057;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.footer-certificates {
+    margin-top: 20px;
+}
+
+.footer-certificates a {
+    margin: 0 10px;
+}
+
+.footer-certificates img {
+    max-width: 50px;
+    transition: opacity 0.3s ease;
+}
+
+.footer-certificates img:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .footer-column {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-certificates a {
+        margin: 10px;
+    }
+}
+
+.button-container {
+    position: absolute;
+    top: 50%; /* Centrados verticalmente */
+    left: 50%; /* Centrados horizontalmente */
+    transform: translate(-50%, -50%); /* Ajustar para centrar completamente */
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre botones */
+    z-index: 2; /* Asegurarse de que los botones estén sobre la imagen */
+}
+
+.btn-link,
+.btn-link-up {
+    background-color: #da801ae3;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 22px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Centrar el texto dentro del enlace */
+}
+
+.btn-link-up {
+    position: relative;
+    top: -50px; /* Mueve el enlace más arriba en relación a su posición original */
+}
+
+.btn-link:hover,
+.btn-link-up:hover {
+    background-color: #b06816; /* Cambio de color en hover */
+}
+
+@media (min-width: 768px) {
+    .btn-link-up {
+        top: -70px; /* Aún más arriba en pantallas grandes */
+        font-size: 24px; /* Aumentar el tamaño del texto en pantallas grandes */
+    }
+}
+
+
+
+/* Estilos generales */
+.titulo-carta {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    color: #333;
+}
+
+.cartas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Tres columnas adaptativas */
+    gap: 20px; /* Espacio entre cartas */
+    padding: 0 20px; /* Asegurar espacio lateral en pantallas más pequeñas */
+    box-sizing: border-box; /* Evitar overflow debido a padding */
+}
+
+.carta-item {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.carta-item h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #444;
+}
+
+.imagenes-carta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.imagenes-carta img {
+    width: 100%;
+    height: auto;
+    max-width: 90%;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+/* Estilos responsivos para pantallas medianas */
+@media (max-width: 1024px) {
+    .cartas-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Ajuste para pantallas medianas */
+        gap: 15px; /* Reduce el gap para pantallas más pequeñas */
+    }
+
+    .titulo-carta {
+        font-size: 2em; /* Reduce el tamaño del título */
+    }
+
+    .carta-item h2 {
+        font-size: 1.6em;
+    }
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 600px) {
+    .cartas-container {
+        grid-template-columns: 1fr; /* Solo una columna en pantallas pequeñas */
+        padding: 0 10px;
+    }
+
+    .titulo-carta {
+        font-size: 1.8em;
+    }
+
+    .carta-item h2 {
+        font-size: 1.4em;
+    }
+}
+/* Estilo para el fondo de la página de carta */
+body.carta-page {
+    background-color: #f5f5dc; /* Color crema */
+}
+
+/* PÁGINA DE NOSOTROS */
+/* Estilos generales */
+.titulo-seccion {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.historia, .codigo-etico, .equipo {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.historia p, .codigo-etico ul, .equipo-container {
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+.codigo-etico ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.codigo-etico ul li {
+    margin: 10px 0;
+}
+
+.codigo-etico ul li strong {
+    color: #333;
+}
+
+.equipo-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.miembro-equipo {
+    text-align: center;
+    margin: 10px;
+    flex: 1;
+}
+
+.miembro-equipo img {
+    max-width: 200px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.miembro-equipo h3 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.miembro-equipo p {
+    color: #777;
+}
+
+.galeria-imagenes {
+    padding: 20px;
+    text-align: center;
+}
+
+.galeria-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.imagen-item {
+    flex: 1 1 calc(33.333% - 30px); /* Ajusta la cantidad de imágenes por fila */
+    max-width: calc(33.333% - 30px);
+    box-sizing: border-box;
+}
+
+.imagen-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .imagen-item {
+        flex: 1 1 calc(50% - 30px); /* Dos imágenes por fila en pantallas pequeñas */
+        max-width: calc(50% - 30px);
+    }
+}
+
+@media (max-width: 480px) {
+    .imagen-item {
+        flex: 1 1 100%; /* Una imagen por fila en pantallas muy pequeñas */
+        max-width: 100%;
+    }
+}

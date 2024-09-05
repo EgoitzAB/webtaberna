@@ -1,0 +1,15 @@
+<button id="menuToggle">☰ Menú</button>
+
+<div id="menuOverlay" class="overlay">
+    <div id="menu" class="menu">
+        <button id="closeMenu">✕</button>
+        <ul>
+            <li><a href="{% url 'home' %}">Página principal</a></li>
+            <li><a href="{% url 'carta' %}">Carta</a></li>
+            <li><a href="https://www.google.com/maps/reserve/v/dine/c/p43SBzepBZs?source=pa&opi=79508299&hl=es-ES&gei=sb3YZvSrBoiGxc8Pr-btqQ8&sourceurl=http://www.google.com/service/MapsPlaceService/GetPlace?authuser%3D0%26gl%3Des%26hl%3Des%26q%3DMadre%2BMia" target="_blank">Reservas y Contacto</a></li>
+            <li><a href="#filosofia">Filosofía</a></li>
+            <li><a href="{% url 'nosotros' %}">Sobre nosotros</a></li>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC322B5RoDjaHtcSDJxf8NJAxkylcTuFjE&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    {% load static %}
+    {% block extrablock %}{% endblock extrablock %}
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <!-- Swiper para el carrousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+</head>
+<body class="{% block body_class %}{% endblock body_class %}">
+    {% block content %}{% endblock content %}
+    
+    {% block javascript %}{% endblock javascript %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

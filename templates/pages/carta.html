@@ -1,0 +1,22 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Carta{% endblock title %}
+{% block body_class %}carta-page{% endblock body_class %}
+{% block content %}
+{% include 'pages/navbar.html' %}
+<h1 class="titulo-carta">Nuestra Carta</h1>
+
+<div class="cartas-container">
+    {% for carta in cartas %}
+        <div class="carta-item">
+            <h2>{{ carta.idioma }}</h2>
+            <div class="imagenes-carta">
+                {% for imagen in carta.imagenes.all %}
+                    <img src="{{ imagen.imagen.url }}" alt="Carta en {{ carta.idioma }} - Imagen {{ imagen.indice }}">
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% include 'pages/footer.html' %}
+{% endblock content %}
