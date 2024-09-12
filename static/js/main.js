@@ -64,12 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
-        slidesPerView: 'auto',
+        spaceBetween: 10,
+        loop: true,
         coverflowEffect: {
-            rotate: 30,
-            stretch: 0,
-            depth: 0,
-            modifier: 1.5,
+            rotate: 20,
+            stretch: 10,
+            depth: 200,
+            modifier: 1,
             slideShadows: true,
         },
         pagination: {
@@ -80,5 +81,35 @@ document.addEventListener('DOMContentLoaded', function() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
+        breakpoints: {
+            320: { // Pantallas pequeñas
+                slidesPerView: 1, // Muestra solo 1 diapositiva
+            },
+            768: { // Tablets
+                slidesPerView: 1.5, // Muestra una diapositiva y media
+            },
+            1024: { // Pantallas medianas a grandes
+                slidesPerView: 2, // Muestra dos diapositivas
+            },
+            1440: { // Pantallas grandes
+                slidesPerView: 3, // Muestra tres diapositivas
+            }
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const imagenes = document.querySelectorAll('.imagen-item');
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.3 });
+
+    imagenes.forEach(imagen => {
+        observer.observe(imagen);
     });
 });

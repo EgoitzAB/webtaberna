@@ -29,16 +29,26 @@ class Parrafos(models.Model):
             img_without_exif.save(self.imagen.path, quality=90, optimize=True)
 
 
-class Carta(models.Model):
-    idioma = models.CharField(max_length=50)
+class ImagenAdicional(models.Model):
+    parrafo = models.ForeignKey(Parrafos, related_name='imagenes_adicionales', on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='parrafos_imagenes_adicionales/')
+    indice = models.IntegerField(blank=True, null=True)  # Puedes usar esto para ordenar las imágenes
 
     def __str__(self):
-        return self.idioma
+        return f"Imagen adicional {self.indice} para {self.parrafo}"
 
-class CartaImagen(models.Model):
-    carta = models.ForeignKey(Carta, related_name='imagenes', on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='cartas/')
-    indice = models.PositiveIntegerField()
 
-    def __str__(self):
-        return f"{self.carta.idioma} - Imagen {self.indice}"
+# class Carta(models.Model):
+#     idioma = models.CharField(max_length=50)
+
+#     def __str__(self):
+#         return self.idioma
+
+# class CartaImagen(models.Model):
+#     carta = models.ForeignKey(Carta, related_name='imagenes', on_delete=models.CASCADE)
+#     imagen = models.ImageField(upload_to='cartas/')
+#     indice = models.PositiveIntegerField()
+
+#     def __str__(self):
+#         return f"{self.carta.idioma} - Imagen {self.indice}"
+

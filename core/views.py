@@ -1,5 +1,10 @@
 from django.views.generic import DetailView, TemplateView
-from .models import Textos, Carta
+from .models import Textos
+from django.http import FileResponse
+import os
+from django.views.decorators.http import require_GET
+from django.http import HttpResponse
+
 
 class HomeListView(DetailView):
     model = Textos
@@ -16,14 +21,40 @@ class HomeListView(DetailView):
         context['parrafos'] = self.object.parrafos_set.all().order_by('posicion')
         return context
 
+def carta_pdf_view(request):
+    # Ruta del archivo PDF
+    pdf_path = os.path.join('static', 'pdfs', 'carta.pdf')
 
-class CartaView(TemplateView):
-    template_name = 'pages/carta.html'
+    # Abrir el archivo en modo lectura binaria
+    pdf_file = open(pdf_path, 'rb')
 
+    # Devolverlo como respuesta de archivo
+    return FileResponse(pdf_file, content_type='application/pdf')
+
+class NosotrosView(DetailView):
+    model = Textos
+    template_name = 'core/equipo.html'
+    context_object_name = 'vista'
+    
+    def get_object(self):
+        return Textos.objects.get(nombre_vista="nosotros")
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cartas'] = Carta.objects.all()  # Obtén todas las cartas
+        # Obtener todas las instancias del modelo Nosotros
+        context['parrafos'] = self.object.parrafos_set.all().order_by('posicion')
         return context
 
-class NosotrosView(TemplateView):
-    template_name = 'core/equipo.html'
+
+class PrivacyPolicyView(TemplateView):
+    template_name = 'core/privacy_policy.html'
+
+class TermsConditionsView(TemplateView):
+    template_name = 'core/terminos_y_condiciones.html'
+    
+
+@require_GET
+def robots_txt(request):
+    file_path = os.path.join('static', 'robots.txt')
+    with open(file_path, 'r') as f:
+        return HttpResponse(f.read(), content_type="text/plain")

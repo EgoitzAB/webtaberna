@@ -1,0 +1,17 @@
+{% extends 'pages/base.html' %}
+
+{% block title %}Carta - Gastrotaberna Madre Mía{% endblock title %}
+{% block body_class %}carta-page{% endblock body_class %}
+
+{% block content %}
+{% include 'pages/navbar.html' %}
+
+<h1 class="titulo-carta">Nuestra Carta en PDF</h1>
+
+<div class="download-section">
+    <p>Descarga nuestra carta en PDF para consultarla fácilmente en tu dispositivo.</p>
+    <a href="{% url 'carta_pdf' %}" class="btn-link" download="carta.pdf">Descargar Carta en PDF</a>
+</div>
+
+{% include 'pages/footer.html' %}
+{% endblock content %}

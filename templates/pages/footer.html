@@ -8,41 +8,44 @@
     </div> <!-- Div para el mapa -->
 
     <div class="custom-footer">
-    <div class="footer-container">
-        <div class="footer-column logo-column">
-            <a href="/" class="footer-logo">
-                <img src="ruta/a/tu/logo.png" alt="Logo">
-            </a>
-        </div>
-        <div class="footer-column contact-column">
-            <h4>Contacto</h4>
-            <div class="footer-list">
-                <span class="footer-list-item"><a href="tel:+34123456789">+34 923336686</a></span>
-                <span class="footer-list-item"><a href="mailto:info@example.com">info@example.com</a></span>
+        <div class="footer-container">
+            <!-- Columna de logo -->
+            <div class="footer-column logo-column">
+                <a href="/" class="footer-logo">
+                    <img src="ruta/a/tu/logo.png" alt="Logo">
+                </a>
             </div>
-            <div class="footer-social">
-                <a href="https://www.facebook.com" target="_blank">Facebook</a> | 
-                <a href="https://www.instagram.com" target="_blank">Instagram</a>
+            <!-- Columna de enlaces -->
+            <div class="footer-column links-column">
+                <h4>Enlaces</h4>
+                <ul class="footer-menu">
+                    <li><a href="/trabaja-con-nosotros">Trabaja con nosotros</a></li>
+                    <li><a href="{% url 'terms_conditions' %}">Aviso Legal</a></li>
+                    <li><a href="{% url 'privacy_policy' %}">Política de Privacidad</a></li>
+                    <li><a href="/medio-ambiente">Medio Ambiente</a></li>
+                    <li><a href="/politica-de-mascotas">Política de Mascotas</a></li>
+                </ul>
             </div>
-        </div>
-        <div class="footer-column links-column">
-            <h4>Enlaces</h4>
-            <ul class="footer-menu">
-                <li><a href="/trabaja-con-nosotros">Trabaja con nosotros</a></li>
-                <li><a href="/aviso-legal">Aviso Legal</a></li>
-                <li><a href="/politica-de-privacidad">Política de Privacidad</a></li>
-                <li><a href="/medio-ambiente">Medio Ambiente</a></li>
-                <li><a href="/politica-de-mascotas">Política de Mascotas</a></li>
-            </ul>
+            <!-- Columna de contacto -->
+            <div class="footer-column contact-column">
+                <h4>Contacto</h4>
+                <div class="footer-list">
+                    <span class="footer-list-item"><a href="tel:+34123456789">+34 923336686</a></span>
+                    <span class="footer-list-item"><a href="mailto:gastromadremia@gmail.com">info@example.com</a></span>
+                </div>
+                <div class="footer-social">
+                    <a href="https://www.facebook.com" target="_blank" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.instagram.com/gastromadremia/" target="_blank" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
+
     <div class="footer-bottom">
         <p>© 2024 Gastrotaberna Madre Mía. Todos los derechos reservados.</p>
-        {% comment %} <div class="footer-certificates">
-            <a href="https://example.com/certificate1" target="_blank"><img src="ruta/a/certificado1.png" alt="Certificado 1"></a>
-            <a href="https://example.com/certificate2" target="_blank"><img src="ruta/a/certificado2.png" alt="Certificado 2"></a>
-            <a href="https://example.com/certificate3" target="_blank"><img src="ruta/a/certificado3.png" alt="Certificado 3"></a>
-        </div> {% endcomment %}
     </div>
-</div>
 </footer>

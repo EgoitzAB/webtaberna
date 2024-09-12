@@ -1,74 +1,37 @@
 {% extends 'pages/base.html' %}
-{% load static %} <!-- Cargar las etiquetas estáticas -->
 
 {% block title %}Nuestro Equipo - Gastrotaberna Madre Mía{% endblock title %}
-
+{% block body_class %}nosotros{% endblock body_class %}
 {% block content %}
 {% include 'pages/navbar.html' %}
+
 <h1 class="titulo-seccion">Nuestro Equipo</h1>
 
-<!-- Sección de la Historia -->
-<section class="historia">
-    <h2>Nuestra Historia</h2>
-    <p>
-        En el corazón de nuestra querida ciudad, nació Gastrotaberna Madre Mía, un lugar donde la tradición y la innovación culinaria se encuentran. 
-        Desde nuestros inicios, hemos buscado ofrecer una experiencia gastronómica única, combinando recetas tradicionales con toques modernos.
-        Nuestra historia es la historia de nuestras raíces, del amor por la buena comida, y de la pasión por ofrecer siempre lo mejor a nuestros clientes.
-    </p>
-    <blockquote>
-        "La comida es el ingrediente que une a las personas". – Anónimo
-    </blockquote>
-</section>
-
-<!-- Sección del Código Ético -->
-<section class="codigo-etico">
-    <h2>Nuestro Código Ético</h2>
-    <ul>
-        <li><strong>Respeto por el Producto:</strong> Utilizamos ingredientes frescos y de calidad, respetando la estacionalidad y apoyando a productores locales.</li>
-        <li><strong>Compromiso con la Sostenibilidad:</strong> Promovemos prácticas sostenibles en cada etapa de nuestra operación, minimizando el desperdicio y cuidando el medio ambiente.</li>
-        <li><strong>Pasión por la Excelencia:</strong> Nos esforzamos por superar las expectativas de nuestros clientes, cuidando cada detalle en la preparación y presentación de nuestros platos.</li>
-        <li><strong>Trabajo en Equipo:</strong> Creemos en el poder del trabajo en equipo. Valoramos la colaboración y el respeto mutuo dentro y fuera de la cocina.</li>
-        <li><strong>Transparencia y Honestidad:</strong> Nos comprometemos a ser transparentes con nuestros clientes y a actuar con integridad en todas nuestras interacciones.</li>
-    </ul>
-</section>
-
-<!-- Nueva Sección: Galería de Imágenes -->
-<section class="galeria-imagenes">
-    <h2>Galería de Imágenes</h2>
-    <div class="galeria-container">
-        <div class="imagen-item">
-            <img src="{% static 'images/galeria/im1.jpg' %}" alt="Imagen 1">
-        </div>
-        <div class="imagen-item">
-            <img src="{% static 'images/galeria/im2.jpg' %}" alt="Imagen 2">
-        </div>
-        <div class="imagen-item">
-            <img src="{% static 'images/galeria/im3.jpg' %}" alt="Imagen 3">
-        </div>
-        <!-- Añade más imágenes si es necesario -->
-    </div>
-</section>
-
-<!-- Sección de Conoce a Nuestro Equipo -->
 <section class="equipo">
-    <h2>Conoce a Nuestro Equipo</h2>
-    <div class="equipo-container">
-        <div class="miembro-equipo">
-            <img src="{% static 'images/equipo/chef.jpg' %}" alt="Chef Principal">
-            <h3>Juan Pérez</h3>
-            <p>Chef Ejecutivo</p>
+    {% for parrafo in parrafos %}
+        <h2>{{ parrafo.titulo }}</h2>
+        <p>{{ parrafo.texto }}</p>
+
+        <div class="galeria-container">
+            <!-- Imagen principal del párrafo -->
+            {% if parrafo.imagen %}
+                <div class="imagen-item">
+                    <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo }}">
+                </div>
+            {% endif %}
+
+            <!-- Imágenes adicionales del párrafo -->
+            {% for imagen_adicional in parrafo.imagenes_adicionales.all|dictsort:"indice" %}
+                <div class="imagen-item">
+                    <img src="{{ imagen_adicional.imagen.url }}" alt="Imagen adicional {{ imagen_adicional.indice }}">
+                </div>
+            {% empty %}
+                <p>No hay imágenes disponibles para este párrafo.</p>
+            {% endfor %}
         </div>
-        <div class="miembro-equipo">
-            <img src="{% static 'images/equipo/sommelier.jpg' %}" alt="Sommelier">
-            <h3>María Rodríguez</h3>
-            <p>Sommelier</p>
-        </div>
-        <div class="miembro-equipo">
-            <img src="{% static 'images/equipo/gerente.jpg' %}" alt="Gerente">
-            <h3>Carlos Fernández</h3>
-            <p>Gerente General</p>
-        </div>
-    </div>
+    {% empty %}
+        <p>No hay párrafos disponibles.</p>
+    {% endfor %}
 </section>
 
 {% include 'pages/footer.html' %}
