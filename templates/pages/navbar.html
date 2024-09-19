@@ -1,4 +1,9 @@
-<button id="menuToggle">☰ Menú</button>
+{% load static %}
+<!-- Botón con logo y texto de menú -->
+<button id="menuToggle">
+    <img src="{% static 'images/logo.png' %}" alt="Menú" style="height: 100px; width: auto; background-color: white">
+</button>
+
 
 <div id="menuOverlay" class="overlay">
     <div id="menu" class="menu">

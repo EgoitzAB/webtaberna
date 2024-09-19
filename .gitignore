@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+
 
 # Django stuff:
 *.log
@@ -24,3 +26,5 @@ venv.bak/
 
 # VS Code specific
 .vscode/
+
+/media/
