@@ -1,3 +1,4 @@
+{% load static %}
 <!-- Footer con el mapa -->
 <footer>
     <h4 class="titulo-footer">Visítanos</h4>
@@ -12,7 +13,7 @@
             <!-- Columna de logo -->
             <div class="footer-column logo-column">
                 <a href="/" class="footer-logo">
-                    <img src="ruta/a/tu/logo.png" alt="Logo">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" style="height: 100px; width: auto; background-color: white">
                 </a>
             </div>
             <!-- Columna de enlaces -->
@@ -22,8 +23,6 @@
                     <li><a href="/trabaja-con-nosotros">Trabaja con nosotros</a></li>
                     <li><a href="{% url 'terms_conditions' %}">Aviso Legal</a></li>
                     <li><a href="{% url 'privacy_policy' %}">Política de Privacidad</a></li>
-                    <li><a href="/medio-ambiente">Medio Ambiente</a></li>
-                    <li><a href="/politica-de-mascotas">Política de Mascotas</a></li>
                 </ul>
             </div>
             <!-- Columna de contacto -->

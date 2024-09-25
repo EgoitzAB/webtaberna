@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, TemplateView
-from .models import Textos
+from .models import Textos, Parrafos, ImagenAdicional
 from django.http import FileResponse
 import os
 from django.views.decorators.http import require_GET
@@ -41,10 +41,21 @@ class NosotrosView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Obtener todas las instancias del modelo Nosotros
-        context['parrafos'] = self.object.parrafos_set.all().order_by('posicion')
+        
+        # Obtener todos los párrafos asociados a la vista "nosotros"
+        parrafos = Parrafos.objects.filter(vista=self.object).order_by('posicion')
+        context['parrafos'] = parrafos
+        
+        # Obtener todas las imágenes principales y adicionales como objetos completos
+        imagenes_principales = parrafos.exclude(imagen='').all()  # Párrafos con imágenes principales
+        imagenes_adicionales = ImagenAdicional.objects.filter(parrafo__vista=self.object).all()  # Imágenes adicionales
+        
+        # Pasar las imágenes principales y adicionales al contexto
+        context['imagenes_principales'] = imagenes_principales
+        context['imagenes_adicionales'] = imagenes_adicionales
+        
         return context
-
+    
 
 class PrivacyPolicyView(TemplateView):
     template_name = 'core/privacy_policy.html'

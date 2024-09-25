@@ -1,7 +1,7 @@
 {% load static %}
 <!-- Botón con logo y texto de menú -->
 <button id="menuToggle">
-    <img src="{% static 'images/logo.png' %}" alt="Menú" style="height: 100px; width: auto; background-color: white">
+    <img src="{% static 'images/logo.png' %}" alt="Menú">
 </button>
 
 
@@ -12,7 +12,6 @@
             <li><a href="{% url 'home' %}">Página principal</a></li>
             <li><a href="{% url 'carta_pdf' %}" target="_blank">Carta</a></li>
             <li><a href="https://www.google.com/maps/reserve/v/dine/c/p43SBzepBZs?source=pa&opi=79508299&hl=es-ES&gei=sb3YZvSrBoiGxc8Pr-btqQ8&sourceurl=http://www.google.com/service/MapsPlaceService/GetPlace?authuser%3D0%26gl%3Des%26hl%3Des%26q%3DMadre%2BMia" target="_blank">Reservas y Contacto</a></li>
-            <li><a href="#filosofia">Filosofía</a></li>
             <li><a href="{% url 'nosotros' %}">Sobre nosotros</a></li>
         </ul>
     </div>

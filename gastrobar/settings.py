@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'core',
+    
+    'defender',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'defender.middleware.FailedLoginMiddleware', # Django-defender
+
 ]
 
 ROOT_URLCONF = 'gastrobar.urls'
@@ -83,6 +87,15 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -130,3 +143,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Django Defender Settings
+DEFENDER_LOGIN_FAILURE_LIMIT = 5  # Número de intentos fallidos permitidos antes de bloquear
+DEFENDER_COOLOFF_TIME = 300  # Tiempo en segundos para desbloquear después de un bloqueo (5 minutos)
+DEFENDER_STORE_ACCESS_ATTEMPTS = True  # Almacenar intentos fallidos
+DEFENDER_LOCKOUT_URL = '/locked/'  # URL de redirección cuando un usuario es bloqueado
+DEFENDER_REDIS_URL = 'redis://localhost:6379/0'  # URL de conexión a Redis
+DEFENDER_LOCKOUT_TEMPLATE = 'defender/lockout.html'  # Plantilla personalizada para la página de bloqueo
+DEFENDER_DISABLE_IP_LOCKOUT = False
+DEFENDER_DISABLE_USERNAME_LOCKOUT = False  # Bloquear por nombre de usuario
+DEFENDER_USE_CELERY = False  # Usar Celery para desbloquear usuarios (requiere Celery configurado)
+
+# Bloquear tanto por IP como por nombre de usuario
+DEFENDER_LOCKOUT_BY_IP_AND_USERNAME = True  # Bloquea la combinación de IP y nombre de usuario

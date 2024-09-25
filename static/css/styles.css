@@ -10,13 +10,21 @@ body {
     position: fixed;
     top: 20px;
     left: 20px;
+    height: 100px;
+    width: 150px;
     font-size: 30px;
     cursor: pointer;
     z-index: 1100;
     color: green;
-    background-color: #da801ae3;
+    background-color: transparent;
     border-radius: 50%;
     overflow: hidden;
+}
+
+#menuToggle img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Asegura que la imagen llene el botón sin distorsión */
 }
 
 #menuOverlay {
@@ -82,7 +90,25 @@ body {
     transition: color 0.3s ease;
     max-width: 100%; /* Asegura que los enlaces no excedan el ancho de la pantalla */
     box-sizing: border-box;
+    position: relative;
 }
+
+#menu ul li a::before {
+    content: "";
+    position: absolute;
+    width: 0; /* Comienza con un ancho de 0 */
+    height: 2px; /* Altura de la línea */
+    bottom: -2px; /* Posición en la parte inferior del enlace */
+    left: 0; /* Comienza desde la izquierda */
+    background-color: yellow; /* Color de la línea */
+    transition: width 0.4s ease-out; /* Transición para animar la línea */
+}
+
+/* Hover effect: la línea crece hacia la derecha */
+#menu ul li a:hover::before {
+    width: 100%; /* La línea se expande completamente al hacer hover */
+}
+
 #closeMenu {
     position: absolute;
     top: 10px;
@@ -215,12 +241,14 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
+    padding: 5%;
 }
 
 /* Content block para las imágenes de izquierda y derecha */
 .content-block {
     width: 48%;
     text-align: center;
+    margin: 15px 0;
     transform: translateY(-300px); /* Posición inicial arriba fuera de pantalla */
     opacity: 0;
     transition: opacity 1.5s ease-out, transform 1.5s ease-out;
@@ -710,4 +738,43 @@ body.nosotros {
       padding-right: 22%;
     }
   }
-  
+
+
+/* Estilo para las imágenes principales */
+.swiper.gallery-top {
+    height: 50vh; /* La altura será el 50% del viewport height (mitad de la pantalla visible) */
+    width: 100%;
+}
+
+.swiper.gallery-top .swiper-slide img {
+    width: 100%;  /* La imagen principal ocupará todo el ancho */
+    height: 100%;  /* La imagen principal ocupará toda la altura */
+    object-fit: cover;  /* Recorta la imagen si es necesario, para que ocupe todo el contenedor */
+    max-height: 500px;  /* Limita la altura máxima de la imagen principal */
+}
+
+/* Estilo de las miniaturas */
+.swiper.gallery-thumbs {
+    height: 10vh; /* Miniaturas más pequeñas, 10% de la altura de la ventana */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 0;
+}
+
+.swiper.gallery-thumbs .swiper-slide {
+    height: 100%;  /* Las miniaturas usan toda la altura disponible del contenedor */
+    opacity: 0.4;
+    cursor: pointer;
+    max-width: 100px;  /* Limitar el ancho máximo de cada miniatura */
+}
+
+.swiper.gallery-thumbs .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiper.gallery-thumbs .swiper-slide img {
+    width: 100%;  /* La miniatura ocupará todo el ancho del slide */
+    height: 100%;  /* La miniatura ocupará toda la altura */
+    object-fit: cover;  /* Se asegura de que la imagen se vea bien dentro de su contenedor */
+    max-height: 100px;  /* Limita la altura máxima de la miniatura */
+}
