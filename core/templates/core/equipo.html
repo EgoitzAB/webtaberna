@@ -57,26 +57,4 @@
 
 {% include 'pages/footer.html' %}
 
-<!-- Inicialización de Swiper -->
-<script>
-    var galleryThumbs = new Swiper('.gallery-thumbs', {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        loop: true,
-        freeMode: true,
-        watchSlidesProgress: true,
-    });
-
-    var galleryTop = new Swiper('.gallery-top', {
-        spaceBetween: 10,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        thumbs: {
-            swiper: galleryThumbs
-        }
-    });
-</script>
 {% endblock content %}
