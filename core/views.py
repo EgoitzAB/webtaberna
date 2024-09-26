@@ -4,7 +4,7 @@ from django.http import FileResponse
 import os
 from django.views.decorators.http import require_GET
 from django.http import HttpResponse
-
+from django.conf import settings
 
 class HomeListView(DetailView):
     model = Textos
@@ -19,6 +19,7 @@ class HomeListView(DetailView):
         context = super().get_context_data(**kwargs)
         # Recupera y ordena los párrafos asociados a la vista "portada"
         context['parrafos'] = self.object.parrafos_set.all().order_by('posicion')
+        context['heading'] = 'Portada'
         return context
 
 def carta_pdf_view(request):
@@ -66,6 +67,6 @@ class TermsConditionsView(TemplateView):
 
 @require_GET
 def robots_txt(request):
-    file_path = os.path.join('static', 'robots.txt')
+    file_path = os.path.join(settings.BASE_DIR, 'static', 'robots.txt')
     with open(file_path, 'r') as f:
         return HttpResponse(f.read(), content_type="text/plain")

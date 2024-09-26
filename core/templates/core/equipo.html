@@ -10,6 +10,7 @@
 <section class="equipo">
     {% for parrafo in parrafos %}
         <h2>{{ parrafo.titulo|title }}</h2>
+             <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo}}>
         <p>{{ parrafo.texto }}</p>
     {% endfor %}
 </section>

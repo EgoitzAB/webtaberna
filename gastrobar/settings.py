@@ -25,11 +25,11 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-0(^ih@4q-u##&9)p1ip+kzvpkb@%5#s(rkfgn!-whina1fho@2')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['gastromadremia.com', 'www.gastromadremia.com', 'localhost', '94.143.137.10']
 
-
+SITES_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
@@ -167,3 +167,22 @@ DEFENDER_USE_CELERY = False  # Usar Celery para desbloquear usuarios (requiere C
 
 # Bloquear tanto por IP como por nombre de usuario
 DEFENDER_LOCKOUT_BY_IP_AND_USERNAME = True  # Bloquea la combinación de IP y nombre de usuario
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'debug.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
