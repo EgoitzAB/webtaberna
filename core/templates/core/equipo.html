@@ -9,52 +9,64 @@
 
 <section class="equipo">
     {% for parrafo in parrafos %}
+	<div class="content-block">
         <h2>{{ parrafo.titulo|title }}</h2>
-             <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo}}>
+             <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo}}"/>
         <p>{{ parrafo.texto }}</p>
+	</div>
     {% endfor %}
 </section>
 
 <!-- Swiper Thumb Gallery -->
 <div class="swiper gallery-top">
     <div class="swiper-wrapper">
-        <!-- Carrusel principal de imágenes -->
-        {% for parrafo in parrafos %}
+        <!-- Carrusel principal de imágenes principales -->
+        {% for parrafo in imagenes_principales %}
             {% if parrafo.imagen %}
                 <div class="swiper-slide">
-                    <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo }}">
+                    <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo }}"/>
                 </div>
             {% endif %}
-            {% for imagen_adicional in parrafo.imagenes_adicionales.all %}
+        {% endfor %}
+
+        <!-- Carrusel principal de imágenes adicionales -->
+        {% for imagen_adicional in imagenes_adicionales %}
+            {% if imagen_adicional.imagen %}
                 <div class="swiper-slide">
                     <img src="{{ imagen_adicional.imagen.url }}" alt="Imagen adicional {{ imagen_adicional.indice }}">
                 </div>
-            {% endfor %}
+            {% endif %}
         {% endfor %}
     </div>
+
     <!-- Botones de navegación -->
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
 </div>
 
-<!-- Miniaturas Swiper -->
-<div class="swiper gallery-thumbs">
+<!-- Carrusel de miniaturas -->
+<div thumbsSlider="" class="swiper gallery-thumbs">
     <div class="swiper-wrapper">
-        <!-- Carrusel de miniaturas -->
-        {% for parrafo in parrafos %}
+        <!-- Imágenes principales -->
+        {% for parrafo in imagenes_principales %}
             {% if parrafo.imagen %}
                 <div class="swiper-slide">
                     <img src="{{ parrafo.imagen.url }}" alt="Miniatura de {{ parrafo.titulo }}">
                 </div>
             {% endif %}
-            {% for imagen_adicional in parrafo.imagenes_adicionales.all %}
+        {% endfor %}
+
+        <!-- Imágenes adicionales -->
+        {% for imagen_adicional in imagenes_adicionales %}
+            {% if imagen_adicional.imagen %}
                 <div class="swiper-slide">
                     <img src="{{ imagen_adicional.imagen.url }}" alt="Miniatura adicional {{ imagen_adicional.indice }}">
                 </div>
-            {% endfor %}
+            {% endif %}
         {% endfor %}
     </div>
 </div>
+
 
 {% include 'pages/footer.html' %}
 

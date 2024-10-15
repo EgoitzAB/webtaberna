@@ -211,7 +211,6 @@ body {
     }
 }
 
-
 /* Ocultar imágenes inicialmente */
 .responsive-img {
     width: 100%;
@@ -226,6 +225,10 @@ body {
 
 .responsive-img-top {
     margin-top:0 !important;
+}
+
+.top-image {
+    overflow: hidden;
 }
 /* Mostrar imágenes con animación */
 .image-visible {
@@ -332,7 +335,7 @@ body {
     justify-content: center;
     border-radius: 10px; /* Bordes redondeados */
     overflow: hidden; /* Oculta cualquier desbordamiento no deseado */
-    width: calc(80% - 10px); /* Ajusta el ancho al 80% del contenedor con un pequeño margen */
+    width: 100%; /* Ajusta el ancho al 80% del contenedor con un pequeño margen */
     height: 100%;
 }
 
@@ -666,9 +669,10 @@ body.nosotros {
 }
 
 .historia, .equipo, .galeria-imagenes {
-    padding: 40px;
+    padding: 0px;
     margin: 20px auto;
-    max-width: 1200px;
+    max-width: 100%;
+    text-align: center;
 }
 
 /* Galería */
@@ -741,40 +745,58 @@ body.nosotros {
 
 
 /* Estilo para las imágenes principales */
+
 .swiper.gallery-top {
     height: 50vh; /* La altura será el 50% del viewport height (mitad de la pantalla visible) */
     width: 100%;
+    position: relative; /* Asegúrate de que sea relativo para posicionar bien los controles */
 }
 
 .swiper.gallery-top .swiper-slide img {
-    width: 100%;  /* La imagen principal ocupará todo el ancho */
-    height: 100%;  /* La imagen principal ocupará toda la altura */
-    object-fit: cover;  /* Recorta la imagen si es necesario, para que ocupe todo el contenedor */
-    max-height: 500px;  /* Limita la altura máxima de la imagen principal */
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;  
+    max-height: 500px;  
+    background-position: center;
 }
 
 /* Estilo de las miniaturas */
 .swiper.gallery-thumbs {
-    height: 10vh; /* Miniaturas más pequeñas, 10% de la altura de la ventana */
     width: 100%;
     box-sizing: border-box;
     padding: 10px 0;
 }
 
 .swiper.gallery-thumbs .swiper-slide {
-    height: 100%;  /* Las miniaturas usan toda la altura disponible del contenedor */
+    height: 100%;  
     opacity: 0.4;
     cursor: pointer;
-    max-width: 100px;  /* Limitar el ancho máximo de cada miniatura */
+    max-width: 100px;
 }
 
 .swiper.gallery-thumbs .swiper-slide-thumb-active {
     opacity: 1;
 }
 
-.swiper.gallery-thumbs .swiper-slide img {
-    width: 100%;  /* La miniatura ocupará todo el ancho del slide */
-    height: 100%;  /* La miniatura ocupará toda la altura */
-    object-fit: cover;  /* Se asegura de que la imagen se vea bien dentro de su contenedor */
-    max-height: 100px;  /* Limita la altura máxima de la miniatura */
+.swiper-slide img {
+    display: block;
+    width: 100%;  
+    height: 100%;  
+    object-fit: cover;
+    max-height: 100px;  
+}
+
+/* Posicionamiento de flechas en la galería principal */
+.swiper-button-next,
+.swiper-button-prev {
+    color: #fff; /* Cambia el color según tu diseño */
+    z-index: 10; /* Asegúrate de que estén en la parte superior */
+}
+
+.gallery-top .swiper-button-next {
+    right: 10px; 
+}
+
+.gallery-top .swiper-button-prev {
+    left: 10px; 
 }

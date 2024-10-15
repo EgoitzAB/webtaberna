@@ -38,19 +38,33 @@ class NosotrosView(DetailView):
     context_object_name = 'vista'
     
     def get_object(self):
-        return Textos.objects.get(nombre_vista="nosotros")
-    
+        try:
+            return Textos.objects.get(nombre_vista="nosotros")
+        except Textos.DoesNotExist:
+            # Maneja el caso cuando el objeto no se encuentra
+            return None  # O lanza un error personalizado si lo deseas
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
         # Obtener todos los párrafos asociados a la vista "nosotros"
-        parrafos = Parrafos.objects.filter(vista=self.object).order_by('posicion')
-        context['parrafos'] = parrafos
-        
+        try:
+            parrafos = Parrafos.objects.filter(vista=self.object).order_by('posicion')
+        except Exception as e:
+            # Maneja cualquier error que pueda ocurrir al obtener párrafos
+            context['parrafos'] = []  # Puedes establecer un valor predeterminado o manejarlo de otra manera
+            context['error_parrafos'] = str(e)  # Almacena el mensaje de error en el contexto para mostrarlo si es necesario
+
         # Obtener todas las imágenes principales y adicionales como objetos completos
-        imagenes_principales = parrafos.exclude(imagen='').all()  # Párrafos con imágenes principales
-        imagenes_adicionales = ImagenAdicional.objects.filter(parrafo__vista=self.object).all()  # Imágenes adicionales
-        
+        try:
+            imagenes_principales = parrafos.exclude(imagen='').all()  # Párrafos con imágenes principales
+            imagenes_adicionales = ImagenAdicional.objects.filter(parrafo__vista=self.object).all()  # Imágenes adicionales
+        except Exception as e:
+            # Maneja errores en la obtención de imágenes
+            imagenes_principales = []
+            imagenes_adicionales = []
+            context['error_imagenes'] = str(e)  # Almacena el mensaje de error en el contexto para mostrarlo si es necesario
+
         # Pasar las imágenes principales y adicionales al contexto
         context['imagenes_principales'] = imagenes_principales
         context['imagenes_adicionales'] = imagenes_adicionales

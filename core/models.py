@@ -34,9 +34,22 @@ class ImagenAdicional(models.Model):
     imagen = models.ImageField(upload_to='parrafos_imagenes_adicionales/')
     indice = models.IntegerField(blank=True, null=True)  # Puedes usar esto para ordenar las imágenes
 
+    def save(self, *args, **kwargs):
+        super(ImagenAdicional, self).save(*args, **kwargs)
+        if self.imagen:
+            # Abrir la imagen
+            img = Image.open(self.imagen.path)
+            max_size = (800, 600)  # Define el tamaño máximo como el mismo de Parrafos
+            # Redimensionar la imagen
+            img.thumbnail(max_size, Image.Resampling.LANCZOS)
+
+            # Transponer la imagen para eliminar EXIF
+            img_without_exif = ImageOps.exif_transpose(img)
+            # Guardar la imagen con calidad optimizada
+            img_without_exif.save(self.imagen.path, quality=90, optimize=True)
+
     def __str__(self):
         return f"Imagen adicional {self.indice} para {self.parrafo}"
-
 
 # class Carta(models.Model):
 #     idioma = models.CharField(max_length=50)

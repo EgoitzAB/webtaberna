@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         grabCursor: true,
         centeredSlides: true,
         spaceBetween: 10,
+        slidesPerView: 'auto',
         loop: true,
         coverflowEffect: {
             rotate: 20,
@@ -115,52 +116,27 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var galleryThumbs = new Swiper('.gallery-thumbs', {
-        spaceBetween: 30,
-        loop: true,
-        freeMode: true,
-        watchSlidesProgress: true,
-        breakpoints: {
-            // Cuando la pantalla es >= 320px
-            320: {
-                slidesPerView: 3, // Muestra 3 miniaturas en pantallas pequeñas
-            },
-            480: {
-                slidesPerView: 4, // Muestra 4 miniaturas en pantallas medianas
-            },
-            768: {
-                slidesPerView: 6, // Muestra 6 miniaturas en pantallas grandes
-            },
-            1024: {
-                slidesPerView: 8, // Muestra 8 miniaturas en pantallas más grandes
-            },
-        },
-    });
 
-    var galleryTop = new Swiper('.gallery-top', {
-        spaceBetween: 30,
-        loop: true,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        thumbs: {
-            swiper: galleryThumbs,
-            breakpoints: {
-                // Para pantallas pequeñas
-                320: {
-                    slidesPerView: 1, // Solo 1 imagen principal visible en pantallas pequeñas
-                    height: 200,  // Ajustar altura en pantallas pequeñas
-                },
-                768: {
-                    slidesPerView: 1, // Sigue mostrando 1 imagen principal
-                    height: 300,  // Altura ajustada para pantallas medianas
-                },
-                1024: {
-                    slidesPerView: 1, // 1 imagen principal visible en pantallas grandes
-                    height: 400,  // Mayor altura en pantallas grandes
-                }
+    if (document.querySelector('.gallery-thumbs')) {
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            loop: false,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: galleryThumbs,
+
             }
-        }
+        });
+    }
     });
-});
