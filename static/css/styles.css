@@ -51,7 +51,7 @@ body {
 }
 
 #menu {
-    background-color: rgb(84, 85, 34);
+    background-color: rgb(84, 85, 34, 0.9);
     width: 90vw;
     height: 90vh;
     display: flex;
@@ -323,8 +323,6 @@ body {
 
 .swiper-wrapper {
     display: flex;
-    align-items: center; /* Centra verticalmente las imágenes */
-    justify-content: center; /* Centra horizontalmente las imágenes */
 }
 
 /* Estilo para cada slide */
@@ -675,6 +673,26 @@ body.nosotros {
     text-align: center;
 }
 
+.boton-trabaja {
+    display: inline-block;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #e63946, #d62828);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.boton-trabaja:hover {
+    background: linear-gradient(135deg, #d62828, #ba2222);
+    transform: translateY(-3px);
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3);
+}
+
 /* Galería */
 .galeria-container {
     display: flex;
@@ -710,23 +728,63 @@ body.nosotros {
 }
 
 /* Equipo */
-.equipo-container {
-    display: flex;
-    justify-content: space-around;
+/* Contenedor principal centrado */
+.nosotros {
+    margin-top: 20vh;
+}
+.contenedor-equipo {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
     align-items: center;
 }
 
-.miembro-equipo {
-    text-align: center;
-    max-width: 30%;
-    transition: all 0.8s ease;
+/* Título principal centrado */
+.titulo-seccion {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #161212;
 }
 
-.miembro-equipo h3 {
-    margin-top: 10px;
-    font-size: 1.8em;
-    color: #444;
+/* Bloque de contenido centrado */
+.equipo-bloque {
+    margin-bottom: 40px;
 }
+
+.equipo-bloque h2 {
+    margin: 6vh auto; /* Centrado */
+}
+
+.equipo-bloque p {
+    width: 70%; /* El texto ocupará un 70% del espacio */
+    margin: 6vh auto; /* Centrado */
+    text-align: justify; /* Justificar texto para un mejor aspecto */
+    line-height: 1.6; /* Aumentar el espacio entre líneas para mayor legibilidad */
+    color: #241a1a; /* Color de texto suave */
+    font-size: 1.1rem; /* Tamaño de fuente más legible */
+}
+
+.equipo-bloque img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Sección trabaja con nosotros */
+.trabaja-equipo {
+    background-color: #f8f8f8;
+    padding: 40px 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 50px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
 
 /* Animación cuando aparecen en viewport */
 .visible {
@@ -783,7 +841,7 @@ body.nosotros {
     width: 100%;  
     height: 100%;  
     object-fit: cover;
-    max-height: 100px;  
+    max-height: 100%;  
 }
 
 /* Posicionamiento de flechas en la galería principal */

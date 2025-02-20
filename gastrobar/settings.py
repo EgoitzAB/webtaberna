@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-0(^ih@4q-u##&9)p1ip+kzvpkb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['gastromadremia.com', 'www.gastromadremia.com', 'localhost', '94.143.137.10']
+ALLOWED_HOSTS = ['gastromadremia.com', 'www.gastromadremia.com', 'localhost', '94.143.137.10', '127.0.0.1']
 
 SITES_ID = 1
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'core',
+    'django_extensions', # Para iniciar en ssl
     
     'defender',
     'django_prometheus',
@@ -152,7 +153,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 

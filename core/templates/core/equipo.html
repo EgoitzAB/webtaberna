@@ -5,38 +5,38 @@
 {% block content %}
 {% include 'pages/navbar.html' %}
 
-<h1 class="titulo-seccion">Nuestro Equipo</h1>
+<div class="contenedor-equipo">
+    <h1 class="titulo-seccion">Nuestro Equipo</h1>
 
-<section class="equipo">
     {% for parrafo in parrafos %}
-	<div class="content-block">
-        <h2>{{ parrafo.titulo|title }}</h2>
-             <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo}}"/>
-        <p>{{ parrafo.texto }}</p>
-	</div>
+        <div class="equipo-bloque">
+            <h2>{{ parrafo.titulo|title }}</h2>
+            {% if parrafo.imagen %}
+                <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo}}"/>
+            {% endif %}
+            <p>{{ parrafo.texto }}</p>
+        </div>
     {% endfor %}
-</section>
 
 <!-- Swiper Thumb Gallery -->
 <div class="swiper gallery-top">
     <div class="swiper-wrapper">
         <!-- Carrusel principal de imágenes principales -->
         {% for parrafo in imagenes_principales %}
-            {% if parrafo.imagen %}
-                <div class="swiper-slide">
-                    <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo }}"/>
-                </div>
-            {% endif %}
-        {% endfor %}
-
-        <!-- Carrusel principal de imágenes adicionales -->
-        {% for imagen_adicional in imagenes_adicionales %}
-            {% if imagen_adicional.imagen %}
-                <div class="swiper-slide">
-                    <img src="{{ imagen_adicional.imagen.url }}" alt="Imagen adicional {{ imagen_adicional.indice }}">
-                </div>
-            {% endif %}
-        {% endfor %}
+        {% if parrafo.imagen %}
+            <div class="swiper-slide">
+                <img src="{{ parrafo.imagen.url }}" alt="Imagen de {{ parrafo.titulo }}"/>
+            </div>
+        {% endif %}
+    {% endfor %}
+    
+    {% for imagen_adicional in imagenes_adicionales %}
+        {% if imagen_adicional.imagen %}
+            <div class="swiper-slide">
+                <img src="{{ imagen_adicional.imagen.url }}" alt="Imagen adicional {{ imagen_adicional.indice }}">
+            </div>
+        {% endif %}
+    {% endfor %}
     </div>
 
     <!-- Botones de navegación -->
@@ -65,6 +65,15 @@
             {% endif %}
         {% endfor %}
     </div>
+</div>
+
+<section class="trabaja-con-nosotros">
+    <h2>¿Quieres unirte a nuestro equipo?</h2>
+    <p>Estamos buscando talento. Si te apasiona la gastronomía, ¡queremos conocerte!</p>
+    <p>Entrega tu CV en persona en nuestro local:</p>
+    <p><strong>Gastrotaberna Madre Mía</strong><br> Calle Francisco de Vitoria 3, Salamanca</p>
+</section>
+
 </div>
 
 

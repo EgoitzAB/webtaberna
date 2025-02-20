@@ -50,6 +50,7 @@ class NosotrosView(DetailView):
         # Obtener todos los párrafos asociados a la vista "nosotros"
         try:
             parrafos = Parrafos.objects.filter(vista=self.object).order_by('posicion')
+            context['parrafos'] = parrafos
         except Exception as e:
             # Maneja cualquier error que pueda ocurrir al obtener párrafos
             context['parrafos'] = []  # Puedes establecer un valor predeterminado o manejarlo de otra manera
@@ -70,10 +71,11 @@ class NosotrosView(DetailView):
         context['imagenes_adicionales'] = imagenes_adicionales
         
         return context
-    
+
 
 class PrivacyPolicyView(TemplateView):
     template_name = 'core/privacy_policy.html'
+    
 
 class TermsConditionsView(TemplateView):
     template_name = 'core/terminos_y_condiciones.html'
