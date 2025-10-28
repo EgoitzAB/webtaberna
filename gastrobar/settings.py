@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     
     'core',
     'django_extensions', # Para iniciar en ssl
-    
+
     'defender',
     'django_prometheus',
 ]
@@ -94,7 +94,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/1",
+        "LOCATION": "redis://redis:6379/0",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
@@ -162,7 +162,7 @@ DEFENDER_LOGIN_FAILURE_LIMIT = 5  # Número de intentos fallidos permitidos ante
 DEFENDER_COOLOFF_TIME = 300  # Tiempo en segundos para desbloquear después de un bloqueo (5 minutos)
 DEFENDER_STORE_ACCESS_ATTEMPTS = True  # Almacenar intentos fallidos
 DEFENDER_LOCKOUT_URL = '/locked/'  # URL de redirección cuando un usuario es bloqueado
-DEFENDER_REDIS_URL = 'redis://localhost:6379/0'  # URL de conexión a Redis
+DEFENDER_REDIS_URL = 'redis://redis:6379/0'  # URL de conexión a Redis
 DEFENDER_LOCKOUT_TEMPLATE = 'defender/lockout.html'  # Plantilla personalizada para la página de bloqueo
 DEFENDER_DISABLE_IP_LOCKOUT = False
 DEFENDER_DISABLE_USERNAME_LOCKOUT = False  # Bloquear por nombre de usuario
